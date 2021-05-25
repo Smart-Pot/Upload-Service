@@ -42,9 +42,10 @@ func MakeHTTPHandlers(e endpoints.Endpoints, logger log.Logger) http.Handler {
 		options...,
 	))
 
-	r.Methods("GET").PathPrefix("/").Handler(http.FileServer(
-		http.Dir("./upload"),
-	))
+	r.Methods("GET").PathPrefix("/").Handler(
+		http.StripPrefix("/upload/", http.FileServer(
+			http.Dir("./upload"),
+		)))
 
 	return pkghttp.EnableCORS(r)
 }
