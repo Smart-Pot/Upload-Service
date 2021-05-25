@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./Upload-Service .
 
 RUN go mod download
-RUN go build -o /postservice
+RUN go build -o /uploadservice
 
 FROM alpine:3.13
 COPY --from=build /app/config/ ./config/
